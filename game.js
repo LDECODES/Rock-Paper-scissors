@@ -1,54 +1,76 @@
-function getComputerChoice() {
-    const choices = ["rock", "paper", "scissors"];
-    const randomIndex = Math.floor(Math.random() * choices.length);
-    return choices[randomIndex];
-}
-
-function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
-    if (playerSelection === computerSelection) {
-        return "It's a tie!";
-    } else if (
-        (playerSelection === "rock" && computerSelection === "scissors") ||
-        (playerSelection === "paper" && computerSelection === "rock") ||
-        (playerSelection === "scissors" && computerSelection === "paper")
-    ) {
-        return "You win! " + playerSelection + " beats " + computerSelection;
-    } else {
-        return "You lose! " + computerSelection + " beats " + playerSelection;
-    }
-}
-
-function game() {
+document.addEventListener('DOMContentLoaded', function() {
+    let results = document.querySelector('.results');
+    let playerText = document.querySelector('.playerText');
+    let computerText = document.querySelector('.computerText');
     let playerScore = 0;
     let computerScore = 0;
+    
+// Function to randomly select computer's choice
+    function getComputerChoice() {
+        const arr = ["rock", "paper", "scissors"];
+        const choice = arr[Math.floor(Math.random() * arr.length)];
+        return choice;
+    }
 
-    for (let i = 0; i < 5; i++) {
-        const playerSelection = prompt("Choose rock, paper, or scissors:");
-        const computerSelection = getComputerChoice();
-        const roundResult = playRound(playerSelection, computerSelection);
+    function endGame(computerScore,playerScore) {  
+    let winner;
+    if (computerScore > playerScore) {
+        winner = "Computer";
+        results.textContent = "Computer wins the game. Reload the page to try again!"
+        buttons.forEach(button => {
+            button.disabled = true;
+        });
+    }
+    else if (playerScore > computerScore){ 
+        winner = "You";
+        results.textContent = `${winner} win the game congrats. Reload the page to try again!`
+        buttons.forEach(button => {
+            button.disabled = true;
+        });
+    }else{
+        
+    }
 
-        console.log(roundResult);
+    }
+   
+    // Function to determine round result
+    function playRound(playerSelection, computerSelection) {
+        if (playerSelection === computerSelection) {
+                results.textContent = "This Round was a Tie:("
+                tie++
+        } else if (playerSelection === 'rock' && computerSelection === 'scissors' ||
+                   playerSelection === 'paper' && computerSelection === 'rock' ||
+                   playerSelection === 'scissors' && computerSelection === 'paper') {
+                playerScore++
+                results.textContent = 'You win this round!:)'
+                playerText.textContent = `Player: ${playerScore}`
+            } else {
+            computerScore++
+            results.textContent = "The computer wins this round:("
+            computerText.textContent = `Computer: ${computerScore}`
+        
+        }
+        checkScore(playerScore, computerScore)
 
-        if (roundResult.includes("win")) {
-            playerScore++;
-        } else if (roundResult.includes("lose")) {
-            computerScore++;
+        return 
+       
+    };
+        
+    function checkScore(playerScore, computerScore){
+        if (playerScore == 5 || computerScore === 5) {
+            endGame(computerScore,playerScore)
         }
     }
-
-    if (playerScore > computerScore) {
-        console.log("You win the game!");
-    } else if (playerScore < computerScore) {
-        console.log("You lose the game.");
-    } else {
-        console.log("It's a tie game.");
-    }
-}
-
-game();
-
-
-
-
-
+        
+    let buttons = document.querySelectorAll('input')
+    buttons.forEach(button => {
+        button.addEventListener("click", (event) => {
+         let playerSelection = button.id
+         let computerSelection = getComputerChoice()
+         console.log(computerSelection);
+         playRound(playerSelection, computerSelection);
+          
+        })
+      })
+        
+});

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock,Paper,Scissors</title>
     <link rel="stylesheet" href="style.css">
+    <script src="game.js"></script>
 </head>
 <body>
     <div class="content">
@@ -14,7 +15,7 @@
         <span class="Scissors"> Scissors!</span>
     </h1>
     </div>
-    <div class="results">This is a placeholder for the results</div>
+    <div class="results">Click a button to start the game</div>
     <div>
     <div class="playerInput"></div>
     <div class="gamebox">
@@ -22,14 +23,11 @@
             <div class= "rowInside">
             <h1 class="playerText">Player</h1>
             <div class="playerButtons">
-                <input type="image" src="Icons/fist.png" alt="Rock" class="rockB">
-                <input type="image" src="Icons/hand-paper.png" alt="Paper" class="paperB">
-                <input type="image" src="Icons/scissors.png" alt="Scissors"  class="scissorsB">
+                <input type="image" src="Icons/fist.png" alt="Rock" class="rockB" id="rock">
+                <input type="image" src="Icons/hand-paper.png" alt="Paper" class="paperB" id="paper">
+                <input type="image" src="Icons/scissors.png" alt="Scissors"  class="scissorsB" id="scissors">
+            </div>
             
-            </div>
-            <div class="playerInput">
-                placeholder
-            </div>
             </div>
         </div>
         <div class="computerbox">
